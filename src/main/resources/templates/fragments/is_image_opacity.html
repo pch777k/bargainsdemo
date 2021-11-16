@@ -1,0 +1,17 @@
+<div th:fragment="is_image_opacity(photo_url)">
+	
+<!-- Display an image (clear or opacity) -->	
+<a th:href="@{/bargains/{id} (id=${bargain.id})}">
+	<th:block th:if="${bargain.photo != null}">
+	<img th:if="${bargain.closed}" th:src="${'/bargains/' + bargain.id + '/photo'}" class="img-height img-fluid opacity-30" />
+   	<img th:unless="${bargain.closed}" th:src="${'/bargains/' + bargain.id + '/photo'}" class="img-height img-fluid" />
+   	</th:block>
+   	<th:block th:if="${bargain.photo == null}">
+	<img th:if="${bargain.closed}" th:src="@{${photo_url}}" class="img-height img-fluid opacity-30" />
+   	<img th:unless="${bargain.closed}" th:src="@{${photo_url}}" class="img-height img-fluid" />
+   	</th:block>
+</a>
+<!-- Display an image (clear or opacity) -->
+	
+</div>
+

@@ -1,0 +1,19 @@
+<head th:fragment="baseHeader(title, links)">
+
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title th:replace="${title}">Base Title | Bargains</title>
+	
+	<!-- Common styles and scripts -->
+	
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<!-- Font awesome -->
+	<link rel="stylesheet" type="text/css" href="/webjars/font-awesome/5.14.0/css/all.css">
+	
+	
+	<!--/* This is a laceholder for additional links */-->
+	<th:block th:replace="${links}" />
+
+</head>

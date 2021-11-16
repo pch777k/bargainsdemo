@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/base :: baseHeader(~{::title},~{::link})">
+
+  <title>[[${#strings.capitalize(#strings.toLowerCase(profileUser.nickname))}]] overview</title>
+  <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+    
+<body>
+<div id="wrap">
+
+  <!-- Navigation -->
+  <div th:replace="fragments/navigation-nosearch :: navigation-nosearch"></div>
+  
+  <!-- Bar-under-navigation -->
+  <div th:replace="fragments/bar-under-navigation :: bar-under-navigation"></div>
+
+  <!-- Bar-tiny-under-navigation -->
+  <div th:replace="fragments/bar-tiny-under-navigation :: bar-tiny-under-navigation(first='text-primary',second='ml-3 text-dark', third='ml-3 text-dark')"></div>
+  
+<div id="main" class="container ">
+	<div class="row">
+		<div class="col-12 col-lg-3 mb-2">
+			<div class="card" >
+  				<div class="card-header text-center">
+   					 Statistics
+  				</div>
+			    <ul class="list-group list-group-flush">
+				    <li class="list-group-item"><i class="fas fa-tag mr-1"></i> [[${totalBargains}]] bargains</li>
+				    <li class="list-group-item"><i class="fas fa-comment mr-1"></i> [[${totalComments}]] comments</li>
+				    <li class="list-group-item"><i class="fas fa-vote-yea mr-1"></i> [[${totalVotes}]] votes</li>
+				    <li class="list-group-item"><i class="fab fa-gripfire mr-1"></i> [[${hottest}]]&#176; hottest</li>
+				    <li class="list-group-item"><i class="fas fa-chart-bar mr-1"></i> [[${average}]]&#176; average</li>
+			    </ul>
+			</div>
+		</div>
+		<div class="col-12 col-lg-9 mb-4">
+			<div class="card" >
+  				<div class="card-header text-center text-primary">
+   					Activity
+  				</div>
+  				<ul class="list-group list-group-flush">
+  					<li th:if="${totalActivities==0}" class="list-group-item text-center"> There is no activity</li>
+    				<li th:each="activity: ${activities}" class="list-group-item">
+    					<div class="row">
+    						<div class="col-2 col-md-1">
+    							<a th:href="@{/bargains/{activityId} (activityId=${activity.bargain.id})}">				    					    	 
+									<img th:if="${activity.bargain.photo != null}" 
+									 th:src="@{${'/bargains/' + activity.bargain.id + '/photo'}}" width="50" height="50" class="rounded border">
+								</a>
+    	
+    						</div>
+    						<div class="col-10 col-md-11">
+    						<th:block th:if="${activity.activityType == T(com.pch777.bargains.model.ActivityType).BARGAIN}"> 
+								<a  th:href="@{/bargains/{activityId} (activityId=${activity.bargain.id})}">
+									<strong><span th:text="${activity.user.nickname}"></span></strong> added the bargain <strong><span th:text="${activity.bargain.title}"></span></strong>
+								</a>
+								<div class="text-muted" title="Added">
+									<i class="fas fa-plus"></i> <small th:text="${T(com.pch777.bargains.service.BargainService).whenElementAdded(activity.createdAt)}" ></small>
+								</div> 
+							</th:block>	
+							<th:block th:if="${activity.activityType == T(com.pch777.bargains.model.ActivityType).COMMENT}"> 
+								<a  th:href="@{/bargains/{activityId} (activityId=${activity.bargain.id})}">
+									<strong><span th:text="${activity.user.nickname}"></span></strong> commented on the bargain <strong><span th:text="${activity.bargain.title}"></span></strong>
+								</a>
+								<div class="text-muted" title="Commented">
+									<i class="fas fa-comment"> </i> <small th:text="${T(com.pch777.bargains.service.BargainService).whenElementAdded(activity.createdAt)}" ></small>
+								</div> 
+							</th:block>	
+							<th:block th:if="${activity.activityType == T(com.pch777.bargains.model.ActivityType).VOTE}"> 
+								<a  th:href="@{/bargains/{activityId} (activityId=${activity.bargain.id})}">
+									<strong><span th:text="${activity.user.nickname}"></span></strong> voted on the bargain <strong><span th:text="${activity.bargain.title}"></span></strong>
+								</a>
+								<div class="text-muted" title="Voted">
+									<i class="fas fa-vote-yea"> </i> <small th:text="${T(com.pch777.bargains.service.BargainService).whenElementAdded(activity.createdAt)}" ></small>
+								</div> 
+							</th:block>						
+							</div>
+						</div>
+				    </li>
+				</ul>
+				
+   				<div class="card-footer pb-1" th:if="${activities.totalPages > 1}">
+   					<!-- Pagination activity-->	
+					<div th:replace="fragments/pagination-activity :: pagination-activity"></div>
+  				</div>
+			</div>
+		</div>	
+	</div>	
+</div>
+
+</div>
+
+  <!-- Footer -->	
+  <div th:replace="fragments/footer :: footer"></div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- Font awesome -->
+  <script src="/webjars/font-awesome/5.14.0/js/all.js" type ="text/javascript"></script>
+   
+</body>
+</html>

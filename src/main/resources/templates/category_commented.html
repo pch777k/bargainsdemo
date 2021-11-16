@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+ <head th:replace="fragments/base :: baseHeader(~{::title},~{::link})">
+
+ <title>[[${#strings.capitalize(#strings.toLowerCase(category))}]] category</title>
+ <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div id="wrap">
+
+  <!-- Navigation -->
+  <div th:replace="fragments/navigation :: navigation(href=${'/'+ #strings.toLowerCase(category)+'/commented'})"></div>
+
+  <!-- Navigation-breadcrumb -->
+  <div th:replace="fragments/navigation-breadcrumb :: navigation-breadcrumb"></div>
+  
+
+  <div id="main" class="container text-center">
+
+  <!-- Navigation-pills -->
+  <div th:replace="fragments/navigation-pills :: navigation-pills(bestClass='nav-link', newClass='nav-link', commentedClass='nav-link active', 
+				  bestHref=${'/'+ #strings.toLowerCase(category)}, 
+				  newHref=${'/'+ #strings.toLowerCase(category)+'/new'},
+				  commentedHref=${'/'+ #strings.toLowerCase(category)+'/commented'}, 
+				  hideHref=${'/'+ #strings.toLowerCase(category)+'/commented'})"></div>	
+
+  <div th:each="bargain: ${bargains}" class="card my-3" >
+	<!-- Bargains display -->
+	<div th:replace="fragments/bargains-display :: bargains-display"></div>  	  
+  </div>	
+
+  <!-- Delete Modal -->	
+  <div th:replace="fragments/modal-delete :: modal-delete"></div>	
+	
+  <!-- Close Modal -->	
+  <div th:replace="fragments/modal-close :: modal-close"></div>	
+	
+  <!-- Open Modal -->	
+  <div th:replace="fragments/modal-open :: modal-open"></div>	
+		
+  <!-- Pagination -->	
+  <div th:replace="fragments/pagination-bargain :: pagination-bargain(href=${'/'+ #strings.toLowerCase(category)+'/commented'})"></div>		
+	
+  </div>
+
+</div>
+	
+  <!-- Footer -->	
+  <div th:replace="fragments/footer :: footer"></div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- Font awesome -->
+  <script src="/webjars/font-awesome/5.14.0/js/all.js" type ="text/javascript"></script>
+    
+  <script src="../static/js/modal-delete.js" th:src="@{/js/modal-delete.js}" type ="text/javascript"></script>
+  <script src="../static/js/modal-close.js" th:src="@{/js/modal-close.js}" type ="text/javascript"></script>
+  <script src="../static/js/modal-open.js" th:src="@{/js/modal-open.js}" type ="text/javascript"></script>
+  <script src="../static/js/copy-to-clipboard.js" th:src="@{/js/copy-to-clipboard.js}" type ="text/javascript"></script>
+
+</body>
+</html>

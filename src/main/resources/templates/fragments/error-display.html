@@ -1,0 +1,18 @@
+<div th:fragment="error-display(bgTextColor)">
+	
+<!-- Error-display -->		
+ <div id="main" class="container text-center mt-5 pt-5">
+  <div class="row justify-content-center align-items-center mt-5 ">
+      <div class="card mb-3" style="max-width: 36rem;">
+        <div th:class="${bgTextColor}">
+          <h1 class="card-title" th:text="${errorTitle}"></h1>
+          <p class="card-text" th:text="${errorText}"></p>
+       	  <a href="/" class="btn btn-sm btn-primary">Go home</a>
+       	</div>
+      </div>
+  </div>	
+</div> 
+<!-- Error-display -->	
+</div>
+
+

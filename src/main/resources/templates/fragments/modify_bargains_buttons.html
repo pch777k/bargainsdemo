@@ -1,0 +1,37 @@
+<div th:fragment="modify_bargains_buttons">
+
+	<!-- Modify Bargains Buttons -->
+	<th:block sec:authorize="hasAuthority('USER')">
+		<th:block th:if="${bargain.user.email.equals(currentUser.email)}">
+			<a class="btn btn-info mr-2" role="button"
+				th:href="@{/bargains/{id}/edit (id=${bargain.id})}"> edit </a>
+			<a th:if="${bargain.closed}" class="openBtn btn btn-info mr-2" role="button"
+				th:href="@{/bargains/{id}/open (id=${bargain.id})}"> open </a>
+			<a th:unless="${bargain.closed}" class="openBtn btn btn-info disabled mr-2" role="button" 
+			   th:href="@{/bargains/{id}/open (id=${bargain.id})}"> open </a>
+			<a th:if="${bargain.closed}" class="closeBtn btn btn-info disabled mr-2" role="button"
+				th:href="@{/bargains/{id}/close (id=${bargain.id})}"> close </a>
+			<a th:unless="${bargain.closed}" class="closeBtn btn btn-info mr-2" role="button" 
+			    th:href="@{/bargains/{id}/close (id=${bargain.id})}"> close </a>
+			<a class="delBtn btn btn-info mr-2" role="button"
+				th:href="@{/bargains/{id}/delete (id=${bargain.id})}"> delete </a>
+		</th:block>
+	</th:block>
+	<th:block sec:authorize="hasAuthority('ADMIN')">
+		<a class="btn btn-info mr-2" role="button"
+			th:href="@{/bargains/{id}/edit (id=${bargain.id})}"> edit </a>
+		<a th:if="${bargain.closed}" class="openBtn btn btn-info mr-2" role="button"
+			th:href="@{/bargains/{id}/open (id=${bargain.id})}"> open </a>
+		<a th:unless="${bargain.closed}" class="openBtn btn btn-info disabled mr-2" role="button" 
+		    th:href="@{/bargains/{id}/open (id=${bargain.id})}"> open </a>
+		<a th:if="${bargain.closed}" class="closeBtn btn btn-info disabled mr-2" role="button"
+			th:href="@{/bargains/{id}/close (id=${bargain.id})}"> close </a>
+		<a th:unless="${bargain.closed}" class="closeBtn btn btn-info mr-2" role="button" 
+		    th:href="@{/bargains/{id}/close (id=${bargain.id})}"> close </a>
+		<a class="delBtn btn btn-info mr-2" role="button"
+			th:href="@{/bargains/{id}/delete (id=${bargain.id})}"> delete </a>
+	</th:block>
+	<!-- Modify Bargains Buttons -->
+
+</div>
+

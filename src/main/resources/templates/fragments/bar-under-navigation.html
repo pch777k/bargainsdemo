@@ -1,0 +1,20 @@
+<div th:fragment="bar-under-navigation">
+	
+<!-- Bar-under-navigation -->	
+<div  class="container-fluid bg-dark" >
+  <div class="container">
+    <span th:if="${profileUser.photo != null}"><img th:src="${'/users/' + profileUser.id + '/photo'}"  width="50" height="50" class="rounded-circle my-3"></span>
+	<span th:if="${profileUser.photo == null}"><img th:src="${noBargainPhoto}" width="50" height="50" class="rounded-circle my-3"></span>
+	<span class="ml-1 h4 text-primary" th:text="${profileUser.nickname}"></span>
+	<th:block th:if="${profileUser.createdAt != null}">
+	<span class="ml-1 text-white" >joined</span>
+	<span class="ml-1 text-white"  th:text="${#temporals.format(profileUser.createdAt, 'dd-MM-yyyy')}" ></span>
+	</th:block>
+	
+  </div>
+</div>
+<!-- Bar-under-navigation -->
+	
+</div>
+
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/base :: baseHeader(~{::title},~{::link})">
+  <title th:text=${pageTitle}></title>
+  <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>    
+
+<body>
+<div id="wrap">
+  <!-- Navigation -->
+  <div th:replace="fragments/navigation-simple :: navigation-simple"></div>
+
+  <!-- Error-display -->
+  <div th:replace="fragments/error-display :: error-display(bgTextColor='card-body bg-light text-dark')"></div>	
+	
+</div>
+	
+  <!-- Footer -->	
+  <div th:replace="fragments/footer :: footer"></div>
+		
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- Font awesome -->
+  <script src="/webjars/font-awesome/5.14.0/js/all.js" type ="text/javascript"></script>
+    
+</body>
+</html>

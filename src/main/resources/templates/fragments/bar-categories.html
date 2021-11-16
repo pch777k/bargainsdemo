@@ -1,0 +1,13 @@
+<div th:fragment="bar-categories">
+	
+<!-- Bar-categories -->	
+<div th:if="${totalBargains > 0}" class="container mt-3">
+  <th:block th:each="category : ${T(com.pch777.bargains.model.Category).values()}">
+    <a class="text-light" th:value="${category}" th:text="${#strings.capitalize(#strings.toLowerCase(category))}" th:href="@{${#strings.toLowerCase(category)}}" role="button">Link</a>
+  <th:block>
+</div>
+<!-- Bar-categories -->
+	
+</div>
+
+

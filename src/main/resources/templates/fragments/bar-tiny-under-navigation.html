@@ -1,0 +1,17 @@
+<div th:fragment="bar-tiny-under-navigation(first, second, third)">
+	
+<!-- Bar-tiny-under-navigation -->	
+<div  class="container-fluid bg-light mb-4">
+  <div class="container py-2">
+   	
+	<a class="user-nav" th:href="@{/users/{userId}/overview (userId=${profileUser.id})}"><span th:class="${first}">Overview</span></a>
+	<a class="user-nav" th:href="@{/users/{userId}/bargains (userId=${profileUser.id})}"><span th:class="${second}">Bargains ([[${totalBargains}]])</span></a>
+	<a class="user-nav" th:href="@{/users/{userId}/comments (userId=${profileUser.id})}"><span th:class="${third}">Comments ([[${totalComments}]])</span></a>
+		
+  </div>
+</div>
+<!-- Bar-tiny-under-navigation -->
+	
+</div>
+
+

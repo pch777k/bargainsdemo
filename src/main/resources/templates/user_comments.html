@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/base :: baseHeader(~{::title},~{::link})">
+  <title>[[${#strings.capitalize(#strings.toLowerCase(profileUser.nickname))}]] comments</title>
+  <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+    
+<body>
+<div id="wrap">
+  
+  <!-- Navigation-nosearch-->  
+  <div th:replace="fragments/navigation-nosearch :: navigation-nosearch"></div>
+
+  <!-- Bar-under-navigation -->
+  <div th:replace="fragments/bar-under-navigation :: bar-under-navigation"></div>
+
+  <!-- Bar-tiny-under-navigation -->
+  <div th:replace="fragments/bar-tiny-under-navigation :: bar-tiny-under-navigation(first='text-dark',second='ml-3 text-dark', third='ml-3 text-primary')"></div>
+  
+
+  <div id="main" class="container text-center">
+	<div class="card mb-4">
+      <div class="card-header ">
+    	<span class="text-primary py-2" title="comments">Comments <i class="far fa-comment"></i> [[${totalComments}]]</span>
+  	  </div>
+  	  <ul class="list-group list-group-flush">
+		<li th:if="${totalComments==0}" class="list-group-item text-center"> There are no comments</li>
+		<li th:each="comment: ${pageComments}" class="list-group-item text-left">
+    	  <div class="row">
+    		<div class="col-2 col-md-1">
+    		  <a th:href="@{/bargains/{bargainId} (bargainId=${comment.bargain.id})}">				    					    	 
+				<img th:if="${comment.bargain.photo != null}" th:src="@{${'/bargains/' + comment.bargain.id + '/photo'}}" width="50" height="50" class="rounded border">
+			  </a>
+    	    </div>
+    		<div class="col-10 col-md-11">
+    	      <a th:href="@{/bargains/{bargainId} (bargainId=${comment.bargain.id})}">
+				<span th:text="${comment.bargain.title}"></span>
+			  </a>
+			  <small th:text="${T(com.pch777.bargains.service.BargainService).whenElementAdded(comment.createdAt)}" ></small>
+			  <div class="text-muted" title="added">
+				<p th:utext="${comment.content}" ></p>
+			  </div> 				
+			</div>
+		  </div>
+		</li>
+	  </ul>
+	  <div th:if="${pageComments.totalPages > 1}" class="card-footer pt-4 d-flex justify-content-center">
+    	<!-- Pagination comments-->	
+		<div th:replace="fragments/pagination-comment :: pagination-comment(href=${'/users/' + #strings.toString(profileUser.id) + '/comments'})"></div>	
+  	  </div>
+	</div>
+
+    <!-- Delete Comment Modal -->	
+    <div th:replace="fragments/modal-delete-comment :: modal-delete-comment"></div>	
+    <!-- Delete Comment Modal -->
+
+  </div>
+</div>
+	
+  <!-- Footer -->	
+  <div th:replace="fragments/footer :: footer"></div>
+	
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- Font awesome -->
+  <script src="/webjars/font-awesome/5.14.0/js/all.js" type ="text/javascript"></script>
+   
+  <script src="../static/js/modal-delete-comment.js" th:src="@{/js/modal-delete-comment.js}" type ="text/javascript"></script>
+    
+</body>
+</html>

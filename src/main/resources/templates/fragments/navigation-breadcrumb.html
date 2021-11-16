@@ -1,0 +1,16 @@
+<div th:fragment="navigation-breadcrumb">
+	
+<!-- Navigation-breadcrumb -->	
+<nav  class="navbar navbar-expand-lg navbar-dark bg-dark " aria-label="breadcrumb">
+  <div class="container">
+    <ol class="breadcrumb bg-transparent">
+	  <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+	  <li class="breadcrumb-item"><a class="text-white" th:href="@{${'/'+ #strings.toLowerCase(category)}}">[[${#strings.capitalize(#strings.toLowerCase(category))}]]</a></li>
+	</ol>
+  </div>
+</nav>
+<!-- Navigation-breadcrumb -->
+	
+</div>
+
+

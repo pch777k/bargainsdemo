@@ -1,0 +1,116 @@
+body, html {
+	height: 100%;
+}
+
+body {
+	background-color: #1aa7ec;
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+	min-height: 100%;
+}
+
+#main {
+	overflow: auto;
+/* 	padding-bottom: 50px; this needs to be bigger than footer height */
+}
+
+.footer {
+	position: relative;
+/* 	margin-top: -50px; negative value of footer height */
+/* 	height: 150px clear:both; */
+/*   padding-top:12px; */
+	background-color: #292b2c;
+	color: #0275d8;
+}
+
+.technologies {
+	height: 50px;
+}
+
+input[type=radio]:checked+label {
+	font-style: normal;
+	color: white;
+	border: 1px solid #0275d8;
+	background-color: #0275d8;
+}
+
+.jumbotron {
+	background-color: #0275d8;
+}
+
+.user-nav {
+	text-decoration: none;
+}
+
+.user-nav:hover {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.checkbox-completed {
+	width: 25px;
+	height: 25px;
+	margin-top: 5px;
+}
+
+.checkbox-closed {
+	width: 25px;
+	height: 25px;
+	margin-top: 12px;
+}
+
+.label-checkbox-closed {
+	margin-top: 12px;
+}
+
+.row-category {
+	margin-left: 0px;
+}
+
+.row-margin {
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.breadcrumb {
+	padding: 2px 0px !important;
+	margin: 0 !important;
+}
+
+.tooltip-inner {
+	background-color: #dea700 !important;
+	color: #000;
+}
+
+.bs-tooltip-top .arrow::before, .bs-tooltip-auto[x-placement^="top"] .arrow::before {
+	border-top-color: #dea700 !important;
+}
+
+.primary-disabled {
+	background-color: #337ab7;
+	color: white;
+}
+
+.opacity-30 {
+	opacity: 0.4;
+}
+
+#nav-toggle-button {
+	background-color: #0275d8;
+}
+
+.img-height {
+	height: 200px;
+}
+
+.img-height  .img-fluid {
+	display: block;
+	width: auto;
+	max-height: 100%;
+}
