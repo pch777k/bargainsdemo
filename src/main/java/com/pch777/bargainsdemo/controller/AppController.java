@@ -42,7 +42,7 @@ import com.pch777.bargainsdemo.model.User;
 import com.pch777.bargainsdemo.model.UserDto;
 import com.pch777.bargainsdemo.model.Vote;
 import com.pch777.bargainsdemo.model.VoteDto;
-import com.pch777.bargainsdemo.security.UserSecurity;
+//import com.pch777.bargainsdemo.security.UserSecurity;
 import com.pch777.bargainsdemo.service.ActivityService;
 import com.pch777.bargainsdemo.service.BargainService;
 import com.pch777.bargainsdemo.service.CommentService;
@@ -57,7 +57,7 @@ public class AppController {
 	private CommentService commentService;
 	private VoteService voteService;
 	private ActivityService activityService;
-	private UserSecurity userSecurity;
+//	private UserSecurity userSecurity;
 	private RestTemplate restTemplate;
 	private final String NO_USER_PHOTO_URL;
      
@@ -71,7 +71,7 @@ public class AppController {
     	CommentService commentService,
 		VoteService voteService, 
 		ActivityService activityService, 
-		UserSecurity userSecurity,
+//		UserSecurity userSecurity,
 		RestTemplate restTemplate,
 		@Value("${bargainapp.no-user-photo-url}") String nO_USER_PHOTO_URL) {
     	
@@ -80,7 +80,7 @@ public class AppController {
 		this.commentService = commentService;
 		this.voteService = voteService;
 		this.activityService = activityService;
-		this.userSecurity = userSecurity;
+//		this.userSecurity = userSecurity;
 		this.restTemplate = restTemplate;
 		this.NO_USER_PHOTO_URL = nO_USER_PHOTO_URL;
     }
@@ -134,14 +134,14 @@ public class AppController {
     @GetMapping("/users/{userId}/delete")
 	@Transactional
 	public String deleteUserById(@PathVariable Long userId) throws ResourceNotFoundException { 
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String email = auth.getName();
+    //	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	//	String email = auth.getName();
     	
-    	if(userSecurity.isAdmin(email)) {
+  //  	if(userSecurity.isAdmin(email)) {
     		userService.deleteUserById(userId);
-    	} else {
-			throw new ForbiddenException("Access denied");
-		}
+   // 	} else {
+	//		throw new ForbiddenException("Access denied");
+	//	}
 		return "redirect:/users";
 	}
     
@@ -355,7 +355,7 @@ public class AppController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 			
-		if(userSecurity.isOwnerOrAdmin(user.getEmail(), email)) {	
+//		if(userSecurity.isOwnerOrAdmin(user.getEmail(), email)) {	
 		
 			List<Bargain> userBargains = bargainService.getAllBargainsByUserId(userId);
 	
@@ -370,9 +370,9 @@ public class AppController {
 			model.addAttribute("userDto", userDto);
 			model.addAttribute("totalBargains", userBargains.size());
 			model.addAttribute("currentUser", userService.findUserByEmail(email)); 
-		} else {
-			throw new ForbiddenException("Access denied");
-		}
+	//	} else {
+	//		throw new ForbiddenException("Access denied");
+	//	}
 		
 		return "profile";
 	}   

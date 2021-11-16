@@ -31,7 +31,7 @@ import com.pch777.bargainsdemo.model.ActivityType;
 import com.pch777.bargainsdemo.model.Bargain;
 import com.pch777.bargainsdemo.model.Comment;
 import com.pch777.bargainsdemo.model.User;
-import com.pch777.bargainsdemo.security.UserSecurity;
+//import com.pch777.bargainsdemo.security.UserSecurity;
 import com.pch777.bargainsdemo.service.ActivityService;
 import com.pch777.bargainsdemo.service.BargainService;
 import com.pch777.bargainsdemo.service.CommentService;
@@ -47,7 +47,7 @@ public class CommentRestController {
 	private CommentService commentService;
 	private BargainService bargainService;
 	private UserService userService;
-	private UserSecurity userSecurity;
+//	private UserSecurity userSecurity;
 	private ActivityService activityService;
 	
 	@GetMapping("/comments")
@@ -165,15 +165,15 @@ public class CommentRestController {
 	public ResponseEntity<Void> updateComment(@RequestBody Comment comment, @PathVariable Long id,
 			Principal principal) throws ResourceNotFoundException {
 		if (commentService.existsById(id)) {
-			if(userSecurity.isOwnerOrAdmin(commentService.getCommentById(id).getUser().getEmail(), principal.getName())) {			
+//			if(userSecurity.isOwnerOrAdmin(commentService.getCommentById(id).getUser().getEmail(), principal.getName())) {			
 				Comment editedComment = commentService.getCommentById(id);
 				comment.setBargain(editedComment.getBargain());
 				comment.setUser(editedComment.getUser());
 				commentService.editComment(comment, id);
 				return ResponseEntity.ok().build();
-			} else {
-				return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-			}
+//			} else {
+//				return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+//			}
 			
 			
 		}
@@ -184,13 +184,13 @@ public class CommentRestController {
 	@DeleteMapping("comments/{id}")
 	public ResponseEntity<Void> deleteCommentById(@PathVariable Long id, Principal principal) {
 		try {
-			Comment comment = commentService.getCommentById(id);
-			if(userSecurity.isOwnerOrAdmin(comment.getUser().getEmail(), principal.getName())) {
+//			Comment comment = commentService.getCommentById(id);
+//			if(userSecurity.isOwnerOrAdmin(comment.getUser().getEmail(), principal.getName())) {
 				commentService.deleteCommentById(id);
 				return ResponseEntity.noContent().build();		
-			} else {
-				return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-			}
+//			} else {
+//				return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+//			}
 		} catch (ResourceNotFoundException ex) {
 			return ResponseEntity.notFound().build();
 		}

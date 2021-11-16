@@ -39,7 +39,7 @@ import com.pch777.bargainsdemo.model.Category;
 import com.pch777.bargainsdemo.model.Comment;
 import com.pch777.bargainsdemo.model.CommentDto;
 import com.pch777.bargainsdemo.model.VoteDto;
-import com.pch777.bargainsdemo.security.UserSecurity;
+//import com.pch777.bargainsdemo.security.UserSecurity;
 import com.pch777.bargainsdemo.service.ActivityService;
 import com.pch777.bargainsdemo.service.BargainService;
 import com.pch777.bargainsdemo.service.CommentService;
@@ -53,7 +53,7 @@ public class BargainController {
 	private CommentService commentService;
 	private UserService userService;
 	private ActivityService activityService;
-	private UserSecurity userSecurity;
+//	private UserSecurity userSecurity;
 	private StringToEnumConverter converter;
 	private RestTemplate restTemplate;	
 	private final String NO_BARGAIN_PHOTO_URL;
@@ -63,7 +63,7 @@ public class BargainController {
 			CommentService commentService, 
 			UserService userService,
 			ActivityService activityService, 
-			UserSecurity userSecurity,
+//			UserSecurity userSecurity,
 			StringToEnumConverter converter,
 			RestTemplate restTemplate, 
 			@Value("${bargainapp.no-bargain-photo-url}") String nO_BARGAIN_PHOTO_URL,
@@ -73,7 +73,7 @@ public class BargainController {
 		this.commentService = commentService;
 		this.userService = userService;
 		this.activityService = activityService;
-		this.userSecurity = userSecurity;
+//		this.userSecurity = userSecurity;
 		this.converter = converter;
 		this.restTemplate = restTemplate;
 		this.NO_BARGAIN_PHOTO_URL = nO_BARGAIN_PHOTO_URL;
@@ -382,12 +382,12 @@ public class BargainController {
 		Bargain bargain = bargainService.getBargainById(bargainId);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
-		if(userSecurity.isOwnerOrAdmin(bargain.getUser().getEmail(), email)) {
+//		if(userSecurity.isOwnerOrAdmin(bargain.getUser().getEmail(), email)) {
 			model.addAttribute("currentUser", userService.findUserByEmail(email));
 			model.addAttribute("bargain", bargain);
-		} else {
-			throw new ForbiddenException("You don't have permission to do it.");
-		}
+//		} else {
+//			throw new ForbiddenException("You don't have permission to do it.");
+//		}
 		return "edit_bargain_form";
 	}
 
@@ -422,11 +422,11 @@ public class BargainController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		
-		if(userSecurity.isOwnerOrAdmin(bargainService.getBargainById(bargainId).getUser().getEmail(), email)) {
+//		if(userSecurity.isOwnerOrAdmin(bargainService.getBargainById(bargainId).getUser().getEmail(), email)) {
 			bargainService.deleteBargainById(bargainId);
-		} else {
-			throw new ForbiddenException("You don't have permission to do it.");
-		}
+//		} else {
+//			throw new ForbiddenException("You don't have permission to do it.");
+//		}
 		return "redirect:/";
 	}
 	 
@@ -434,23 +434,23 @@ public class BargainController {
 	public String closeBargainById(@PathVariable Long bargainId) throws ResourceNotFoundException {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
-		if(userSecurity.isOwnerOrAdmin(bargainService.getBargainById(bargainId).getUser().getEmail(), email)) {
+//		if(userSecurity.isOwnerOrAdmin(bargainService.getBargainById(bargainId).getUser().getEmail(), email)) {
 		bargainService.closeBargainById(bargainId);
-		} else {
-			throw new ForbiddenException("You don't have permission to do it.");
-		}
+//		} else {
+//			throw new ForbiddenException("You don't have permission to do it.");
+//		}
 		return "redirect:/";
 	}
 	
 	@GetMapping("/bargains/{bargainId}/open")
 	public String openBargainById(@PathVariable Long bargainId) throws ResourceNotFoundException {  
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String email = auth.getName();
-		if(userSecurity.isOwnerOrAdmin(bargainService.getBargainById(bargainId).getUser().getEmail(), email)) {
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		String email = auth.getName();
+//		if(userSecurity.isOwnerOrAdmin(bargainService.getBargainById(bargainId).getUser().getEmail(), email)) {
 			bargainService.openBargainById(bargainId);
-		} else {
-			throw new ForbiddenException("You don't have permission to do it.");
-		}
+//		} else {
+//			throw new ForbiddenException("You don't have permission to do it.");
+//		}
 			return "redirect:/";
 		}
 	

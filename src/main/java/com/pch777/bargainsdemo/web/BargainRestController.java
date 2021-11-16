@@ -35,7 +35,7 @@ import com.pch777.bargainsdemo.model.ActivityType;
 import com.pch777.bargainsdemo.model.Bargain;
 import com.pch777.bargainsdemo.model.Category;
 import com.pch777.bargainsdemo.model.User;
-import com.pch777.bargainsdemo.security.UserSecurity;
+//import com.pch777.bargainsdemo.security.UserSecurity;
 import com.pch777.bargainsdemo.service.ActivityService;
 import com.pch777.bargainsdemo.service.BargainService;
 import com.pch777.bargainsdemo.service.UserService;
@@ -49,7 +49,7 @@ public class BargainRestController {
 
 	private BargainService bargainService;
 	private UserService userService;
-	private UserSecurity userSecurity;
+//	private UserSecurity userSecurity;
 	private ActivityService activityService;
 
 	@GetMapping("/bargains")
@@ -164,7 +164,7 @@ public class BargainRestController {
 	public ResponseEntity<Void> updateBargain(@Valid @RequestBody Bargain bargain, @PathVariable Long id, 
 			Principal principal) throws ResourceNotFoundException {
 		if (bargainService.existsById(id)) {
-			if(userSecurity.isOwnerOrAdmin(bargainService.getBargainById(id).getUser().getEmail(), principal.getName())) {			
+	//		if(userSecurity.isOwnerOrAdmin(bargainService.getBargainById(id).getUser().getEmail(), principal.getName())) {			
 				
 				Bargain editedBargain = bargainService.getBargainById(id);
 				bargain.setVoteCount(editedBargain.getVoteCount());
@@ -175,9 +175,9 @@ public class BargainRestController {
 				
 				bargainService.editBargain(bargain, id);
 				return ResponseEntity.ok().build();
-			} else {
-				return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-			}
+	//		} else {
+	//			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+	//		}
 		}
 
 		return ResponseEntity.notFound().build();
@@ -189,13 +189,13 @@ public class BargainRestController {
 	public ResponseEntity<Void> updateBargainTitle(@RequestBody String title, @PathVariable Long id, Principal principal) throws ResourceNotFoundException {
 
 		if (bargainService.existsById(id)) {
-			Bargain bargain = bargainService.getBargainById(id);
-			if(userSecurity.isOwnerOrAdmin(bargain.getUser().getEmail(), principal.getName())) {
+	//		Bargain bargain = bargainService.getBargainById(id);
+	//		if(userSecurity.isOwnerOrAdmin(bargain.getUser().getEmail(), principal.getName())) {
 				bargainService.editBargainTitle(title, id);
 				return ResponseEntity.ok().build();
-			} else {
-				return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-			}
+	//		} else {
+	//			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+	//		}
 		}
 
 		return ResponseEntity.notFound().build();
@@ -206,13 +206,14 @@ public class BargainRestController {
 	public ResponseEntity<Void> deleteBargainById(@PathVariable Long id, Principal principal) {
 		
 		try {
-			Bargain bargain = bargainService.getBargainById(id);
-			if(userSecurity.isOwnerOrAdmin(bargain.getUser().getEmail(), principal.getName())) {
+		//	Bargain bargain = bargainService.getBargainById(id);
+		//	if(userSecurity.isOwnerOrAdmin(bargain.getUser().getEmail(), principal.getName())) {
 				bargainService.deleteBargainById(id);
-				return ResponseEntity.noContent().build(); }
-			else {
-				return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-			}
+				return ResponseEntity.noContent().build(); 
+				//}
+	//		else {
+	//			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+	//		}
 		} catch (ResourceNotFoundException ex) {
 			return ResponseEntity.notFound().build();
 		}

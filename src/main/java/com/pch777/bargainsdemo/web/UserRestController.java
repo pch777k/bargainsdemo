@@ -28,7 +28,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.pch777.bargainsdemo.exception.ResourceNotFoundException;
 import com.pch777.bargainsdemo.model.User;
-import com.pch777.bargainsdemo.security.UserSecurity;
+//import com.pch777.bargainsdemo.security.UserSecurity;
 import com.pch777.bargainsdemo.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -39,7 +39,7 @@ import lombok.AllArgsConstructor;
 public class UserRestController {
 
 	private UserService userService;
-	private UserSecurity userSecurity;
+//	private UserSecurity userSecurity;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 
@@ -112,7 +112,7 @@ public class UserRestController {
 		if (userService.existsById(id)) {
 			User editedUser = userService.findUserById(id);
 					
-			if(userSecurity.isOwnerOrAdmin(editedUser.getEmail(), principal.getName())) {
+//			if(userSecurity.isOwnerOrAdmin(editedUser.getEmail(), principal.getName())) {
 				if(userService.isUserPresent(user.getEmail()) &&  
 						!(editedUser.getEmail().equalsIgnoreCase(user.getEmail())))  {
 					user.setEmail(editedUser.getEmail());
@@ -125,10 +125,10 @@ public class UserRestController {
 				user.setId(editedUser.getId());
 				userService.editUser(user);
 				return ResponseEntity.ok().build();
-				}
-			else {
-				return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-			}
+//				}
+//			else {
+//				return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+//			}
 		}
 		
 		return ResponseEntity.notFound().build();	
@@ -138,13 +138,13 @@ public class UserRestController {
 	public ResponseEntity<Void> deleteUserById(@PathVariable Long id, Principal principal) {
 		
 		try {
-			if(userSecurity.isAdmin(principal.getName())) {
+	//		if(userSecurity.isAdmin(principal.getName())) {
 				userService.deleteUserById(id);
 				return ResponseEntity.noContent().build();
-			}
-			else {
-				return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-			}
+	//		}
+	//		else {
+	//			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+	//		}
 		} catch (ResourceNotFoundException ex) {
 			return ResponseEntity.notFound().build();
 		}

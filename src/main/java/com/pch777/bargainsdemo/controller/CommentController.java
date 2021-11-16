@@ -19,7 +19,7 @@ import com.pch777.bargainsdemo.model.ActivityType;
 import com.pch777.bargainsdemo.model.Bargain;
 import com.pch777.bargainsdemo.model.Comment;
 import com.pch777.bargainsdemo.model.CommentDto;
-import com.pch777.bargainsdemo.security.UserSecurity;
+//import com.pch777.bargainsdemo.security.UserSecurity;
 import com.pch777.bargainsdemo.service.ActivityService;
 import com.pch777.bargainsdemo.service.BargainService;
 import com.pch777.bargainsdemo.service.CommentService;
@@ -35,7 +35,7 @@ public class CommentController {
 	private CommentService commentService;
 	private UserService userService;
 	private ActivityService activityService;
-	private UserSecurity userSecurity;
+//	private UserSecurity userSecurity;
 
 	@RequestMapping("/comments/add")
 	@Transactional
@@ -64,13 +64,13 @@ public class CommentController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		
-		if(userSecurity.isOwnerOrAdmin(commentService.getCommentById(commentId).getUser().getEmail(), email)) {
+//		if(userSecurity.isOwnerOrAdmin(commentService.getCommentById(commentId).getUser().getEmail(), email)) {
 			model.addAttribute("currentUser", userService.findUserByEmail(email));
 			model.addAttribute("comment", comment);
 			model.addAttribute("bargain", bargain);
-		} else {
-			throw new ForbiddenException("Access denied");
-		}
+//		} else {
+//			throw new ForbiddenException("Access denied");
+//		}
 		
 		return "bargain_edit_comment";
 	}
@@ -137,11 +137,11 @@ public class CommentController {
 	public String deleteCommentById(@PathVariable Long bargainId, @PathVariable Long commentId) throws ResourceNotFoundException {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
-		if(userSecurity.isOwnerOrAdmin(commentService.getCommentById(commentId).getUser().getEmail(), email)) {
+//		if(userSecurity.isOwnerOrAdmin(commentService.getCommentById(commentId).getUser().getEmail(), email)) {
 			commentService.deleteCommentById(commentId);
-		} else {
-			throw new ForbiddenException("Access denied");
-		}
+//		} else {
+//			throw new ForbiddenException("Access denied");
+//		}
 		return "redirect:/bargains/" + bargainId;
 	}
 	
