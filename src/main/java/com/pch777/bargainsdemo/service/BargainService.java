@@ -109,7 +109,6 @@ public class BargainService {
 		}
 
 		bargain.setId(id);
-
 		return bargainRepository.save(bargain);		
 	}
 	

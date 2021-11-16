@@ -2,8 +2,8 @@
 	
 <input type="hidden" name="bargainId" th:value="${bargain.id}"/>
   
-  <th:block th:each="vote : ${T(com.pch777.bargains.model.VoteType).values()}">
-	<th:block th:if="${ vote.equals(T(com.pch777.bargains.model.VoteType).DOWNVOTE) }">
+  <th:block th:each="vote : ${T(com.pch777.bargainsdemo.model.VoteType).values()}">
+	<th:block th:if="${ vote.equals(T(com.pch777.bargainsdemo.model.VoteType).DOWNVOTE) }">
 	  <input onclick="javascript: submit()" type="radio" th:field="*{voteType}" th:value="${vote}" class="custom-control-input" >
        	<!-- The user is an anonymous -->
        	<th:block th:if="${loggedUser.equals('anonymousUser')}" >	             	
@@ -26,18 +26,18 @@
 		    </label>	
 	      </th:block>
 	      
-	      <th:block th:if="${(!#lists.isEmpty(bargain.votes)) && !(T(com.pch777.bargains.service.VoteService).userVoted(bargain.votes, currentUser))}">
+	      <th:block th:if="${(!#lists.isEmpty(bargain.votes)) && !(T(com.pch777.bargainsdemo.service.VoteService).userVoted(bargain.votes, currentUser))}">
 	        <label class="btn btn-sm btn-primary py-0 px-1 cursor-pointer" th:for="${#ids.prev('voteType')}" title="vote down">
 			  <i class="fas fa-minus"></i>
 		    </label>	
 	      </th:block>
 	      
-	      <th:block th:if="${(!#lists.isEmpty(bargain.votes)) && T(com.pch777.bargains.service.VoteService).userVoted(bargain.votes, currentUser)}">
+	      <th:block th:if="${(!#lists.isEmpty(bargain.votes)) && T(com.pch777.bargainsdemo.service.VoteService).userVoted(bargain.votes, currentUser)}">
 	        <th:block th:each="v: ${bargain.votes}">
-			  <button th:if="${(v.voteType).equals(T(com.pch777.bargains.model.VoteType).DOWNVOTE) && (v.user.email).equals(loggedUser)}" 
+			  <button th:if="${(v.voteType).equals(T(com.pch777.bargainsdemo.model.VoteType).DOWNVOTE) && (v.user.email).equals(loggedUser)}" 
 			  		  title="You have already voted down" class="btn btn-sm btn-primary py-0 px-1 mb-2" disabled><i class="fas fa-minus"></i>
 			  </button> 
- 	          <button th:if="${(v.voteType).equals(T(com.pch777.bargains.model.VoteType).UPVOTE) && (v.user.email).equals(loggedUser)}" 
+ 	          <button th:if="${(v.voteType).equals(T(com.pch777.bargainsdemo.model.VoteType).UPVOTE) && (v.user.email).equals(loggedUser)}" 
  	          		  class="invisible btn btn-sm btn-primary py-0 px-1 mb-2"><i class="fas fa-minus"></i>
  	          </button> 
             </th:block>	
@@ -46,7 +46,7 @@
         <span class="ml-2 h4" th:text="${bargain.voteCount}"></span> <span class="h4 mr-2">&#176;</span>       
 	</th:block>	                
 
-	<th:block th:if="${vote.equals(T(com.pch777.bargains.model.VoteType).UPVOTE)}">
+	<th:block th:if="${vote.equals(T(com.pch777.bargainsdemo.model.VoteType).UPVOTE)}">
 	  <input onclick="javascript: submit()" type="radio" th:field="*{voteType}" th:value="${vote}" class="custom-control-input" >
        	<!-- The user is an anonymous -->
        	<th:block th:if="${loggedUser.equals('anonymousUser')}" >	             	
@@ -70,18 +70,18 @@
 		    </label>	
 	      </th:block>
 	      
-	      <th:block th:if="${(!#lists.isEmpty(bargain.votes)) && !(T(com.pch777.bargains.service.VoteService).userVoted(bargain.votes, currentUser))}">
+	      <th:block th:if="${(!#lists.isEmpty(bargain.votes)) && !(T(com.pch777.bargainsdemo.service.VoteService).userVoted(bargain.votes, currentUser))}">
 	        <label class="btn btn-sm btn-danger py-0 px-1 cursor-pointer" th:for="${#ids.prev('voteType')}" title="vote up">
 			  <i class="fas fa-plus"></i>
 		    </label>	
 	      </th:block>
 	      
-	      <th:block th:if="${(!#lists.isEmpty(bargain.votes)) && T(com.pch777.bargains.service.VoteService).userVoted(bargain.votes, currentUser)}">
+	      <th:block th:if="${(!#lists.isEmpty(bargain.votes)) && T(com.pch777.bargainsdemo.service.VoteService).userVoted(bargain.votes, currentUser)}">
 	        <th:block th:each="v: ${bargain.votes}">
-			  <button th:if="${(v.voteType).equals(T(com.pch777.bargains.model.VoteType).UPVOTE) && (v.user.email).equals(loggedUser)}" 
+			  <button th:if="${(v.voteType).equals(T(com.pch777.bargainsdemo.model.VoteType).UPVOTE) && (v.user.email).equals(loggedUser)}" 
 			  		  title="You have already voted up" class="btn btn-sm btn-danger py-0 px-1 mb-2" disabled><i class="fas fa-plus"></i>
 			  </button> 
- 	          <button th:if="${(v.voteType).equals(T(com.pch777.bargains.model.VoteType).DOWNVOTE) && (v.user.email).equals(loggedUser)}" 
+ 	          <button th:if="${(v.voteType).equals(T(com.pch777.bargainsdemo.model.VoteType).DOWNVOTE) && (v.user.email).equals(loggedUser)}" 
  	          		  class="invisible btn btn-sm btn-danger py-0 px-1 mb-2"><i class="fas fa-plus"></i>
  	          </button> 
             </th:block>	

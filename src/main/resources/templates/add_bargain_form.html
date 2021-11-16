@@ -104,7 +104,7 @@
 		  <div class="col-12">
 			<label for="category"><strong>CATEGORY</strong></label>
 			<div class="row row-category">	
-	          <div th:each="enumcategory : ${T(com.pch777.bargains.model.Category).values()}">
+	          <div th:each="enumcategory : ${T(com.pch777.bargainsdemo.model.Category).values()}">
 				<input type="radio" th:field="*{category}" th:value="${enumcategory}" style="visibility: hidden;" class="custom-control-input">
 				<label class="btn  btn-outline-primary mr-1" th:for="${#ids.prev('category')}" th:text="${enumcategory}">category</label>
 			  </div>

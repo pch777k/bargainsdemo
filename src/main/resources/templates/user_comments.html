@@ -36,7 +36,7 @@
     	      <a th:href="@{/bargains/{bargainId} (bargainId=${comment.bargain.id})}">
 				<span th:text="${comment.bargain.title}"></span>
 			  </a>
-			  <small th:text="${T(com.pch777.bargains.service.BargainService).whenElementAdded(comment.createdAt)}" ></small>
+			  <small th:text="${T(com.pch777.bargainsdemo.service.BargainService).whenElementAdded(comment.createdAt)}" ></small>
 			  <div class="text-muted" title="added">
 				<p th:utext="${comment.content}" ></p>
 			  </div> 				
